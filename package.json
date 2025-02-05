@@ -1,0 +1,26 @@
+{
+  "name": "hngi12-backend-1",
+  "version": "1.0.0",
+  "description": "Stage 1 Task",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fave7903/hngi12-backend-1.git"
+  },
+  "author": "Favour Solomon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fave7903/hngi12-backend-1/issues"
+  },
+  "homepage": "https://github.com/Fave7903/hngi12-backend-1#readme",
+  "dependencies": {
+    "compression": "^1.7.5",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9"
+  }
+}
