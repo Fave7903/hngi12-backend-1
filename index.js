@@ -69,6 +69,11 @@ const sumOfDigits = (num) => {
 const PORT = process.env.PORT || 3000
 app.get('/api/classify-number', async (req, res) => {
     var number = parseInt(req.query.number)
+
+    if (isNaN(number)) {
+        return res.status(400).json({ number: req.query.number, error: true });
+    }
+
     const url = `http://numbersapi.com/${number}/math`
 
     try {
@@ -104,7 +109,7 @@ app.get('/api/classify-number', async (req, res) => {
     } catch (error) {
         res.status(400).json(
             {
-                number: "alphabet",
+                number: number,
                 error: true
             }
         )
