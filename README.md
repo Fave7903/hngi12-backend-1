@@ -73,7 +73,7 @@ Classifies a given number and returns various mathematical properties.
 
 #### Example Usage
 ```sh
-curl "https://hngi12-backend-1.onrender.com/api/classify-number?number=28"
+curl "https://hngi12-backend-1.vercel.app/api/classify-number?number=28"
 ```
 
 ## Project Structure
