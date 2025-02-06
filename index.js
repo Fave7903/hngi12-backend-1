@@ -200,10 +200,13 @@ const sumOfDigits = (num) => {
 
 
 app.get('/api/classify-number', async (req, res) => {
-    const number = parseInt(req.query.number);
-    if (isNaN(number)) {
-        return res.status(400).json({ number: req.query.number, error: true });
+    const numParam = req.query.number;  // Get query parameter
+
+    if (!numParam || !/^-?\d+$/.test(numParam.trim())) {
+        return res.status(400).json({ number: numParam, error: true });
     }
+
+    const number = parseInt(numParam, 10);
 
     const url = `http://numbersapi.com/${number}/math`;
 
@@ -224,6 +227,7 @@ app.get('/api/classify-number', async (req, res) => {
         res.status(400).json({ number, error: true });
     }
 });
+
 
 module.exports = app;  
 
