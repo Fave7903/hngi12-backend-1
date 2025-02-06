@@ -35,6 +35,8 @@ const isPerfectNumber = (num) => {
 }
 
 const isArmstrongNumber = (num) => {
+    num = Math.abs(num); // Ensure it works for negative numbers
+
     let sum = 0;
     let temp = num;
     const numDigits = num.toString().length; // Get number of digits
