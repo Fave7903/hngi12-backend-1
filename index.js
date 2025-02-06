@@ -201,13 +201,17 @@ app.get('/api/classify-number', async (req, res) => {
     }
 });
 
-// Create and optimize HTTP server
-const PORT = process.env.PORT || 3000;
-const server = http.createServer(app);
+module.exports = app;  
 
-server.keepAliveTimeout = 5000;  // Keep TCP connections alive for 5s
-server.headersTimeout = 6000;    // Headers timeout slightly longer
+// Only start the server when running locally
+if (require.main === module) {
+    const PORT = process.env.PORT || 3000;
+    const server = http.createServer(app);
 
-server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+    server.keepAliveTimeout = 5000;
+    server.headersTimeout = 6000;
+
+    server.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
