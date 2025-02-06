@@ -153,7 +153,7 @@ const isPrime = (num) => {
 
 
 const isPerfectNumber = (num) => {
-    if (num <= 0) return false;   // Perfect numbers must be greater than 0
+    if (num <= 1) return false;   // Perfect numbers must be greater than 0
     let sum = 1;  // Start with 1 (every number is divisible by 1)
     const sqrtNum = Math.sqrt(num);
     
