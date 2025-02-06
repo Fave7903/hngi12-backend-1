@@ -140,40 +140,64 @@ app.use(compression());
 
 // Helper functions
 const isPrime = (num) => {
-    if (num <= 1) return false;
-    if (num <= 3) return true;
-    if (num % 2 === 0 || num % 3 === 0) return false;
+    if (num <= 1) return false;   // Prime numbers are greater than 1
+    if (num <= 3) return true;    // 2 and 3 are prime
+    if (num % 2 === 0 || num % 3 === 0) return false; // Eliminate even numbers and multiples of 3
+
+    // Use 6k +/- 1 optimization (check only potential factors of 6k ± 1)
     for (let i = 5; i * i <= num; i += 6) {
         if (num % i === 0 || num % (i + 2) === 0) return false;
     }
     return true;
 };
 
+
 const isPerfectNumber = (num) => {
-    if (num <= 1) return false;
-    let sum = 1;
-    for (let i = 2; i * i <= num; i++) {
+    if (num <= 0) return false;   // Perfect numbers must be greater than 0
+    let sum = 1;  // Start with 1 (every number is divisible by 1)
+    const sqrtNum = Math.sqrt(num);
+    
+    for (let i = 2; i <= sqrtNum; i++) {
         if (num % i === 0) {
             sum += i;
-            if (i !== num / i) sum += num / i;
+            if (i !== num / i) sum += num / i;  // Add the complement divisor
         }
     }
     return sum === num;
 };
 
+
+
 const isArmstrongNumber = (num) => {
-    num = Math.abs(num);
-    let sum = 0, temp = num, numDigits = num.toString().length;
+    const numDigits = Math.abs(num).toString().length;  // Get number of digits in the absolute value
+    let sum = 0, temp = Math.abs(num);  // Handle negative numbers by using absolute value
+    
     while (temp > 0) {
         let digit = temp % 10;
         sum += Math.pow(digit, numDigits);
         temp = Math.floor(temp / 10);
     }
-    return sum === num;
+
+    return sum === Math.abs(num);  
 };
 
+
+
+
 const isEven = (num) => (num % 2) === 0;
-const sumOfDigits = (num) => [...Math.abs(num).toString()].reduce((sum, digit) => sum + Number(digit), 0);
+
+const sumOfDigits = (num) => {
+    let sum = 0;
+    num = Math.abs(num);  // Handle negative numbers
+    
+    while (num > 0) {
+        sum += num % 10;
+        num = Math.floor(num / 10);  // Remove the last digit
+    }
+
+    return sum;
+};
+
 
 app.get('/api/classify-number', async (req, res) => {
     const number = parseInt(req.query.number);
